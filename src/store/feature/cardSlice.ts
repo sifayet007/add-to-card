@@ -18,13 +18,11 @@ const cardSlice = createSlice({
     addToCard: (state, action: PayloadAction<iPost>) => {
       const { id } = action.payload;
       const existingId = state.post.find((i) => i.id === id);
-      if (existingId) {
-        return;
-      } else {
+      if (!existingId) {
         state.post.push(action.payload);
-      }
+      } 
     },
-    removeCard: (state, action) => {
+    removeCard: (state, action:PayloadAction<number>) => {
       state.post = state.post.filter((item) => item.id !== action.payload);
     },
   },
