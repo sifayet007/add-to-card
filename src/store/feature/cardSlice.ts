@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface iPost {
   userId: number;
   id: number;
-  titile: string;
+  title: string;
   body: string;
 }
 interface PostState {
@@ -16,11 +16,16 @@ const cardSlice = createSlice({
   initialState: initialState,
   reducers: {
     addToCard: (state, action: PayloadAction<iPost>) => {
-      const newState = { ...state, ...action.payload };
-      return newState;
+      const { id } = action.payload;
+      const existingId = state.post.find((i) => i.id === id);
+      if (existingId) {
+        return;
+      } else {
+        state.post.push(action.payload);
+      }
     },
     removeCard: (state, action) => {
-      state.post.filter((item) => item.id !== action.payload);
+      state.post = state.post.filter((item) => item.id !== action.payload);
     },
   },
 });
