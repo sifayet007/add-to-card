@@ -4,13 +4,11 @@ import { IPostData } from "./PostCard";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { removeCard } from "@/store/feature/cardSlice";
 import { IconX } from "@tabler/icons-react";
-
-const AddToCard = () => {
-    const dispatch = useAppDispatch();
-    interface CardState {
+interface CardState {
         post: IPostData[];
     }
-
+const AddToCard = () => {
+    const dispatch = useAppDispatch();
     const card: CardState = useAppSelector((state: { cardReducer: CardState }) => state.cardReducer);
 
     console.log("ADD TO CARD", card.post);
